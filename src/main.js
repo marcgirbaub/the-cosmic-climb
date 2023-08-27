@@ -1,6 +1,6 @@
+import Game from "./components/Game/Game";
 import "./style.css";
 
-document.querySelector("#app").innerHTML = `
-  <div>
-  </div>
-`;
+const game = new Game();
+
+game.render();
