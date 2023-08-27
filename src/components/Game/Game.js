@@ -13,6 +13,8 @@ class Game extends Component {
     this.ctx = this.element.getContext("2d");
     this.element.width = 390;
     this.element.height = 600;
+    this.gameFrame = 0;
+    this.staggerFrame = 26;
   }
 
   render() {
@@ -41,8 +43,24 @@ class Game extends Component {
   animate() {
     this.ctx.clearRect(0, 0, this.element.width, this.element.height);
     this.background.render(this.ctx);
+
+    if (!this.player.isOnGround()) {
+      this.background.update();
+    }
+
     this.player.render(this.ctx);
     this.player.update(this.input);
+
+    if (this.player.isOnGround() && this.gameFrame % this.staggerFrame === 0) {
+      if (this.player.frameX < 3) {
+        this.player.frameX++;
+      } else {
+        this.player.frameX = 0;
+      }
+    }
+
+    this.gameFrame++;
+
     requestAnimationFrame(this.animate);
   }
 }
