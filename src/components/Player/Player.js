@@ -38,7 +38,7 @@ class Player extends Component {
     if (
       this.isOnGround() &&
       input.key === "ArrowRight" &&
-      this.x <= this.gameWidth * 0.4 - this.width / 2
+      !this.isOnRightBoundary()
     ) {
       this.speed = 4;
       this.vy -= 12;
@@ -70,6 +70,10 @@ class Player extends Component {
 
   isOnLeftBoundary() {
     return this.x <= this.gameWidth * 0.4 - this.width / 2;
+  }
+
+  isOnRightBoundary() {
+    return this.x > this.gameWidth * 0.4 - this.width / 2;
   }
 }
 
