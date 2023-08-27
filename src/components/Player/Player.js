@@ -11,7 +11,7 @@ class Player extends Component {
     this.x = this.gameWidth * 0.4 - this.width / 2;
     this.y = this.gameHeight - this.height * 2;
     this.image = document.querySelector(".alienidle");
-    this.frameX = 0;
+    this.frameX = 1;
     this.frameY = 0;
     this.speed = 0;
     this.vy = 0;
