@@ -1,3 +1,4 @@
+import isMobile from "../../lib/isMobile";
 import Background from "../Background/Background";
 import Component from "../Component/Component";
 import InputHandler from "../InputHandler/InputHandler";
@@ -11,10 +12,10 @@ class Game extends Component {
     super(document.querySelector("#app"), "game", "canvas");
 
     this.ctx = this.element.getContext("2d");
-    this.element.width = 390;
-    this.element.height = 600;
+    this.element.width = isMobile() ? window.innerWidth : 390;
+    this.element.height = isMobile() ? window.innerHeight : 600;
     this.gameFrame = 0;
-    this.staggerFrame = 26;
+    this.staggerFrame = 8;
   }
 
   render() {
@@ -52,7 +53,7 @@ class Game extends Component {
     this.player.update(this.input);
 
     if (this.player.isOnGround() && this.gameFrame % this.staggerFrame === 0) {
-      if (this.player.frameX < 3) {
+      if (this.player.frameX < 14) {
         this.player.frameX++;
       } else {
         this.player.frameX = 0;
