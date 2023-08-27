@@ -35,13 +35,21 @@ class Player extends Component {
   }
 
   update(input) {
-    if (this.isOnGround() && input.key === "ArrowRight") {
+    if (
+      this.isOnGround() &&
+      input.key === "ArrowRight" &&
+      this.x <= this.gameWidth * 0.4 - this.width / 2
+    ) {
       this.speed = 4;
       this.vy -= 12;
-    } else if (this.isOnGround() && input.key === "ArrowUp") {
-      this.vy -= 12;
-    } else if (this.isOnGround() && input.key === "ArrowLeft") {
+    } else if (
+      this.isOnGround() &&
+      input.key === "ArrowLeft" &&
+      !this.isOnLeftBoundary()
+    ) {
       this.speed = -4;
+      this.vy -= 12;
+    } else if (this.isOnGround() && input.key === "ArrowUp") {
       this.vy -= 12;
     }
 
@@ -58,6 +66,10 @@ class Player extends Component {
 
   isOnGround() {
     return this.y >= this.gameHeight - this.height * 2;
+  }
+
+  isOnLeftBoundary() {
+    return this.x <= this.gameWidth * 0.4 - this.width / 2;
   }
 }
 
