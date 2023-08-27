@@ -21,7 +21,7 @@ class Background extends Component {
   }
 
   update() {
-    this.y -= this.speed;
+    if (this.y <= -1) this.y -= this.speed;
   }
 }
 

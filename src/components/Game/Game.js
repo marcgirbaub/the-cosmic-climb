@@ -50,7 +50,8 @@ class Game extends Component {
     }
 
     this.player.render(this.ctx);
-    this.player.update(this.input);
+
+    if (this.background.y <= -1) this.player.update(this.input);
 
     if (this.player.isOnGround() && this.gameFrame % this.staggerFrame === 0) {
       if (this.player.frameX < 14) {
