@@ -11,7 +11,7 @@ class Background extends Component {
     this.x = 0;
     this.y = -this.height + this.gameHeight;
     this.image = document.querySelector(".background");
-    this.speed = -4;
+    this.speed = -2;
   }
 
   render(context) {

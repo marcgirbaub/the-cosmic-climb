@@ -30,3 +30,7 @@ body {
 .background {
   display: none;
 }
+
+.jump-animation {
+  display: none;
+}
