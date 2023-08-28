@@ -58,7 +58,9 @@ class Player extends Component {
 
     if (!this.isOnGround()) {
       this.vy += this.weight;
+      this.image = document.querySelector(".jump-animation");
     } else {
+      this.image = document.querySelector(".alienidle");
       this.vy = 0;
       this.speed = 0;
     }

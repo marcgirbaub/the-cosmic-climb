@@ -53,11 +53,27 @@ class Game extends Component {
 
     if (this.background.y <= -1) this.player.update(this.input);
 
-    if (this.player.isOnGround() && this.gameFrame % this.staggerFrame === 0) {
-      if (this.player.frameX < 14) {
-        this.player.frameX++;
-      } else {
-        this.player.frameX = 0;
+    if (this.player.isOnGround()) {
+      this.staggerFrame = 8;
+
+      if (this.gameFrame % this.staggerFrame === 0) {
+        if (this.player.frameX < 14) {
+          this.player.frameX++;
+        } else {
+          this.player.frameX = 0;
+          this.gameFrame = 0;
+        }
+      }
+    } else if (!this.player.isOnGround()) {
+      this.staggerFrame = 8;
+
+      if (this.gameFrame % this.staggerFrame === 0) {
+        if (this.player.frameX < 6) {
+          this.player.frameX++;
+        } else {
+          this.player.frameX = 0;
+          this.gameFrame = 0;
+        }
       }
     }
 
