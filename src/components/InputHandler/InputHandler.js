@@ -1,6 +1,7 @@
 class InputHandler {
   key;
   jumpPressed = false;
+  type;
 
   constructor() {
     window.addEventListener("keydown", (event) => {
@@ -27,6 +28,18 @@ class InputHandler {
         this.jumpPressed = false;
         this.key = "";
       }
+    });
+
+    window.addEventListener("touchstart", (event) => {
+      this.type = event.type;
+      this.key =
+        window.innerWidth / 2 > event.changedTouches[0].pageX
+          ? "ArrowLeft"
+          : "ArrowRight";
+    });
+
+    window.addEventListener("touchend", () => {
+      this.type = "";
     });
   }
 }
