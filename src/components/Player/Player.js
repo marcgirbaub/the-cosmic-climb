@@ -49,6 +49,8 @@ class Player extends Component {
     ) {
       this.speed = -4;
       this.vy -= 12;
+    } else if (input.type === "touchstart" && this.isOnGround()) {
+      this.vy -= 12;
     } else if (this.isOnGround() && input.key === "ArrowUp") {
       this.vy -= 12;
     }
