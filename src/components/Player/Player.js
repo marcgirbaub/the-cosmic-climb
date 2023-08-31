@@ -4,6 +4,8 @@ import Standing from "../../states/Standing";
 import Component from "../Component/Component";
 
 class Player extends Component {
+  maxFrame;
+
   constructor(parentElement, gameWidth, gameHeight, game) {
     super(parentElement);
 

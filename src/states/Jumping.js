@@ -9,6 +9,9 @@ class Jumping extends State {
   }
 
   enter(input) {
+    this.player.frameX = 0;
+    this.player.maxFrame = 7;
+
     if (input.key === "ArrowRight") {
       this.player.vy -= 12;
       this.player.speed = 4;

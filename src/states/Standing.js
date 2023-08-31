@@ -9,6 +9,8 @@ class Standing extends State {
   }
 
   enter() {
+    this.player.frameX = 0;
+    this.player.maxFrame = 14;
     this.player.frameY = 0;
   }
 
