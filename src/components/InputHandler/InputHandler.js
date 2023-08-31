@@ -1,5 +1,5 @@
 class InputHandler {
-  key;
+  key = "";
   jumpPressed = false;
   type;
 

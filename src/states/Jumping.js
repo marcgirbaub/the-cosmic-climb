@@ -14,10 +14,10 @@ class Jumping extends State {
 
     if (input.key === "ArrowRight") {
       this.player.vy -= 12;
-      this.player.speed = 4;
+      this.player.speed = 6;
     } else if (input.key === "ArrowLeft") {
       this.player.vy -= 12;
-      this.player.speed = -4;
+      this.player.speed = -6;
     } else if (input.key === "ArrowUp") {
       this.player.vy -= 12;
     }

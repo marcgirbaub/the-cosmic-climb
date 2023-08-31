@@ -10,5 +10,5 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: { "no-negated-condition": "off" },
+  rules: { "no-negated-condition": "off", "max-params": "off" },
 };
