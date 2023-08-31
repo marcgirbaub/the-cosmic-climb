@@ -9,6 +9,8 @@ class Falling extends State {
   }
 
   enter() {
+    this.player.frameX = 0;
+    this.player.maxFrame = 7;
     this.player.frameY = 1;
   }
 
