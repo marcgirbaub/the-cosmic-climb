@@ -1,7 +1,10 @@
+import Falling from "../../states/Falling";
+import Jumping from "../../states/Jumping";
+import Standing from "../../states/Standing";
 import Component from "../Component/Component";
 
 class Player extends Component {
-  constructor(parentElement, gameWidth, gameHeight) {
+  constructor(parentElement, gameWidth, gameHeight, game) {
     super(parentElement);
 
     this.gameWidth = gameWidth;
@@ -10,12 +13,16 @@ class Player extends Component {
     this.height = 64;
     this.x = this.gameWidth * 0.4 - this.width / 2;
     this.y = this.gameHeight - this.height * 2;
-    this.image = document.querySelector(".alienidle");
+    this.image = document.querySelector(".idle-jump");
     this.frameX = 1;
     this.frameY = 0;
     this.speed = 0;
     this.vy = 0;
     this.weight = 1;
+    this.states = [new Standing(this), new Jumping(this), new Falling(this)];
+    this.currentState = this.states[0];
+    this.currentState.enter();
+    this.game = game;
   }
 
   render(context) {
@@ -35,37 +42,22 @@ class Player extends Component {
   }
 
   update(input) {
-    if (
-      this.isOnGround() &&
-      input.key === "ArrowRight" &&
-      !this.isOnRightBoundary()
-    ) {
-      this.speed = 4;
-      this.vy -= 12;
-    } else if (
-      this.isOnGround() &&
-      input.key === "ArrowLeft" &&
-      !this.isOnLeftBoundary()
-    ) {
-      this.speed = -4;
-      this.vy -= 12;
-    } else if (input.type === "touchstart" && this.isOnGround()) {
-      this.vy -= 12;
-    } else if (this.isOnGround() && input.key === "ArrowUp") {
-      this.vy -= 12;
-    }
+    this.currentState.handleInput(input);
 
     this.x += this.speed;
     this.y += this.vy;
 
     if (!this.isOnGround()) {
       this.vy += this.weight;
-      this.image = document.querySelector(".jump-animation");
     } else {
-      this.image = document.querySelector(".alienidle");
       this.vy = 0;
       this.speed = 0;
     }
+  }
+
+  setState(state) {
+    this.currentState = this.states[state];
+    this.currentState.enter(this.game.input);
   }
 
   isOnGround() {
