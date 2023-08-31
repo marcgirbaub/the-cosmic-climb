@@ -21,7 +21,7 @@ class Game extends Component {
   render() {
     super.render();
 
-    this.input = new InputHandler(this.player);
+    this.input = new InputHandler();
 
     this.player = new Player(
       this.element,
@@ -30,6 +30,7 @@ class Game extends Component {
       this,
       this.input,
     );
+
     this.player.render(this.ctx);
 
     this.background = new Background(
