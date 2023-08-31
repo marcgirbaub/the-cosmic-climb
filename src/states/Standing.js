@@ -19,6 +19,12 @@ class Standing extends State {
       return;
     }
 
+    if (input.type) {
+      this.player.setState(states.jumping);
+
+      return;
+    }
+
     if (input.key === "ArrowUp") {
       this.player.setState(states.jumping);
     } else if (input.key === "ArrowRight" && !this.player.isOnRightBoundary()) {
