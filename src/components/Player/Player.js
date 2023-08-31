@@ -5,15 +5,17 @@ import Component from "../Component/Component";
 
 class Player extends Component {
   maxFrame;
+  scaleX;
 
-  constructor(parentElement, gameWidth, gameHeight, game) {
+  constructor(parentElement, gameWidth, gameHeight, game, input) {
     super(parentElement);
 
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
+    this.input = input;
     this.width = 64;
     this.height = 64;
-    this.x = this.gameWidth * 0.4 - this.width / 2;
+    this.x = this.gameWidth * 0.4 - this.width;
     this.y = this.gameHeight - this.height * 2;
     this.image = document.querySelector(".idle-jump");
     this.frameX = 1;
@@ -25,10 +27,25 @@ class Player extends Component {
     this.currentState = this.states[0];
     this.currentState.enter();
     this.game = game;
+    this.lastScaleX = 1;
   }
 
   render(context) {
     super.render();
+
+    if (this.input.key === "ArrowLeft") {
+      this.scaleX = -1;
+      this.lastScaleX = -1;
+    } else if (this.input.key === "ArrowRight") {
+      this.scaleX = 1;
+      this.lastScaleX = 1;
+    } else if (!this.input.key) {
+      this.scaleX = this.lastScaleX;
+    }
+
+    context.save();
+
+    context.scale(this.scaleX, 1);
 
     context.drawImage(
       this.image,
@@ -36,11 +53,13 @@ class Player extends Component {
       this.frameY * this.height,
       this.width,
       this.height,
-      this.x,
+      this.x * this.scaleX,
       this.y,
-      this.width,
+      this.width * this.scaleX,
       this.height,
     );
+
+    context.restore();
   }
 
   update(input) {
