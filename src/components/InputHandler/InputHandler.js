@@ -3,7 +3,9 @@ class InputHandler {
   jumpPressed = false;
   type;
 
-  constructor() {
+  constructor(player) {
+    this.player = player;
+
     window.addEventListener("keydown", (event) => {
       if (!this.jumpPressed) {
         this.key = event.key;
@@ -32,14 +34,26 @@ class InputHandler {
 
     window.addEventListener("touchstart", (event) => {
       this.type = event.type;
-      this.key =
+      const touchSide =
         window.innerWidth / 2 > event.changedTouches[0].pageX
           ? "ArrowLeft"
           : "ArrowRight";
+
+      if (this.player.isOnLeftBoundary() && touchSide === "ArrowLeft") {
+        this.key = "ArrowUp";
+      } else if (
+        this.player.isOnRightBoundary() &&
+        touchSide === "ArrowRight"
+      ) {
+        this.key = "ArrowUp";
+      } else {
+        this.key = touchSide;
+      }
     });
 
     window.addEventListener("touchend", () => {
       this.type = "";
+      this.key = "";
     });
   }
 }
