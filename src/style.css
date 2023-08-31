@@ -23,18 +23,14 @@ body {
   border-radius: 6px;
 }
 
-.alienidle {
-  display: none;
-}
-
 .background {
   display: none;
 }
 
-.jump-animation {
+.idle-jump {
   display: none;
 }
 
-.idle-jump {
+.platform {
   display: none;
 }

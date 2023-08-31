@@ -21,15 +21,16 @@ class Game extends Component {
   render() {
     super.render();
 
+    this.input = new InputHandler(this.player);
+
     this.player = new Player(
       this.element,
       this.element.width,
       this.element.height,
       this,
+      this.input,
     );
     this.player.render(this.ctx);
-
-    this.input = new InputHandler(this.player);
 
     this.background = new Background(
       this.element,
